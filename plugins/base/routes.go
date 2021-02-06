@@ -558,11 +558,16 @@ func handleCompose(ctx *alps.Context, msg *OutgoingMessage, options *composeOpti
 		return err
 	}
 
+	settings, err := loadSettings(ctx.Session.Store())
+	if err != nil {
+		return err
+	}
+
+	if msg.From == "" && strings.ContainsRune(settings.From, '@') {
+		msg.From = settings.From
+	}
+
 	if msg.From == "" && strings.ContainsRune(ctx.Session.Username(), '@') {
-		settings, err := loadSettings(ctx.Session.Store())
-		if err != nil {
-			return err
-		}
 		if settings.From != "" {
 			addr := mail.Address{
 				Name: settings.From,
@@ -1016,6 +1021,9 @@ func handleMove(ctx *alps.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}
+	if len(uids) == 0 {
+	        return ctx.Redirect(http.StatusFound, fmt.Sprintf("/mailbox/%v", url.PathEscape(mboxName)))
+	}
 
 	to := formOrQueryParam(ctx, "to")
 	if to == "" {
@@ -1062,6 +1070,9 @@ func handleDelete(ctx *alps.Context) error {
 	uids, err := parseUidList(formParams["uids"])
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
+	}
+	if len(uids) == 0 {
+	        return ctx.Redirect(http.StatusFound, fmt.Sprintf("/mailbox/%v", url.PathEscape(mboxName)))
 	}
 
 	err = ctx.Session.DoIMAP(func(c *imapclient.Client) error {
@@ -1115,6 +1126,9 @@ func handleSetFlags(ctx *alps.Context) error {
 	uids, err := parseUidList(formParams["uids"])
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
+	}
+	if len(uids) == 0 {
+	        return ctx.Redirect(http.StatusFound, fmt.Sprintf("/mailbox/%v", url.PathEscape(mboxName)))
 	}
 
 	flags, ok := formParams["flags"]
