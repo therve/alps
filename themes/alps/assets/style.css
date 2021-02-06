@@ -474,8 +474,7 @@ main.create-update .actions {
 
 main.create-update .actions button,
 main.create-update .actions .button-link {
-  padding: 0.4rem 1rem 0.35rem;
-  font-weight: bold;
+  padding: 0.3rem 0.3rem 0.25rem;
 }
 
 main.create-update .actions > *:not(:last-child) {
@@ -553,6 +552,10 @@ main.create-update .event-date input {
 
 .message-list-unread:nth-child(5n+5) {
   border-right: 1px solid #f2f2f2;
+}
+
+.message-list-item .has-attachments {
+  padding: 1em;
 }
 
 aside .new {
@@ -653,22 +656,10 @@ main table tfoot {
   flex-grow: 1;
 }
 
-.action-group label,
-.action-group input,
-.action-group textarea,
-.action-group select {
-  display: block;
-  width: 100%;
-}
-
 .action-group .checkbox input {
   display: inline;
   width: 1rem;
   float: left;
-}
-
-.action-group select {
-  height: 10rem;
 }
 
 .actions-message,
@@ -691,7 +682,7 @@ main table tfoot {
 
 .message-grid {
   display: grid;
-  grid-template-columns: auto 1fr auto 10fr auto;
+  grid-template-columns: auto 3fr auto 10fr auto;
   grid-template-rows: auto;
 }
 
@@ -839,7 +830,6 @@ button,
   text-decoration: none;
   text-align: center;
   display: inline-block;
-  /*padding: 0.4rem 0.4rem 0.35rem;*/
   padding: 0.3rem 0.3rem 0.25rem;
   min-width: 1rem;
   font-size: 12px;

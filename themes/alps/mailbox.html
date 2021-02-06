@@ -37,7 +37,7 @@
             {{ end }}
           </div>
           <div class="message-list-flags {{$classes}}">
-            {{if .Attachments}}<span class="Has attachments">📎</span>{{end}}
+            {{if .Attachments}}<span class="has-attachments">📎</span>{{end}}
             {{if .HasFlag "\\Answered"}}<span class="Replied">↩</span>{{end}}
             {{if .HasFlag "$Forwarded"}}<span class="Forwarded">↪</span>{{end}}
             <form method="POST" action="/message/{{.Mailbox}}/flag">

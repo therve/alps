@@ -33,11 +33,9 @@
     </li>
     {{ with .CategorizedMailboxes }}
     {{ with .Common.Inbox }}{{ template "mbox-link" . }}{{ end }}
-    {{ with .Common.Drafts }}{{ template "mbox-link" . }}{{ end }}
     {{ with .Common.Sent }}{{ template "mbox-link" . }}{{ end }}
     {{ with .Common.Junk }}{{ template "mbox-link" . }}{{ end }}
     {{ with .Common.Trash }}{{ template "mbox-link" . }}{{ end }}
-    {{ with .Common.Archive }}{{ template "mbox-link" . }}{{ end }}
     {{ if .Additional }}
     <hr />
     {{ range .Additional }}
